@@ -121,7 +121,7 @@ fn get_source_from_raw(data: RawData) -> Result<Sauce, AudioError> {
 /// To stop the audio, use AudioManager.stop()
 pub fn play_theme() -> Result<AudioManager, AudioError> {
     let manager = AudioManager::try_default()?;
-    manager.append_raw(static_data::INSTALLER_THEME_DATA, true)?;
+    // manager.append_raw(static_data::INSTALLER_THEME_DATA, true)?;
 
     return Ok(manager);
 }
