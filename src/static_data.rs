@@ -7,7 +7,7 @@ pub static APP_ICON_DATA: &'static [u8] = include_bytes!("static/icon.png");
 #[cfg(feature="include_license")]
 pub static APP_LICENSE: &'static str = include_str!("static/license.md");
 #[cfg(not(feature="include_license"))]
-pub static APP_LICENSE: &'static str = "You can find the license at https://github.com/Monika-After-Story/MonikaModDev/blob/master/LICENSE.md";
+pub static APP_LICENSE: &'static str = "You can find the license at https://github.com/Just-Natsuki-Team/NatsukiModDev/blob/master/LICENSE.md";
 
 // Images
 pub static VERTICAL_BAR_DATA: &'static [u8] = include_bytes!("static/vertical_bar.png");

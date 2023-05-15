@@ -14,7 +14,7 @@ use lazy_static::lazy_static;
 
 
 // App title
-pub const WIN_TITLE: &str = "Monika After Story Installer";
+pub const WIN_TITLE: &str = "Just Natsuki Installer";
 // Err window title
 pub const ALERT_WIN_TITLE: &str = "Error!";
 // Msg window title
@@ -174,10 +174,10 @@ pub const C_BRIGHT_GREEN: Color = Color::from_hex(0x00ff00);
 
 
 // Raw text
-pub const WELCOME_TOP_FRAME_LABEL: &str = "Welcome to MAS installer";
+pub const WELCOME_TOP_FRAME_LABEL: &str = "Welcome to Just Natsuki installer";
 pub const WELCOME_MID_FRAME_LABEL: &str = concat!(
     "This program will install the latest version\n",
-    "of the Monika After Story mod\n",
+    "of the Just Natsuki mod\n",
     "on your computer"
 );
 pub const LICENSE_FRAME_LABEL: &str = "By continuing you agree with our license";
@@ -191,7 +191,7 @@ pub const ABORT_MID_FRAME_LABEL: &str = concat!(
 );
 pub const DONE_TOP_FRAME_LABEL: &str = "Finished";
 pub const DONE_MID_FRAME_LABEL: &str = concat!(
-    "Monika After Story has been successfully\n",
+    "Just Natsuki has been successfully\n",
     "installed on your computer"
 );
 pub const CREDITS_FRAME_LABEL: &str = "Installer theme by MyNewSoundtrack";
