@@ -382,7 +382,7 @@ fn extract_archive(
 /// Creates a temp dir for the installer temp data
 fn create_temp_dir() -> Result<tempfile::TempDir, io::Error> {
     return tempfile::Builder::new()
-        .prefix(".mas_installer-")
+        .prefix(".jn_installer-")
         .tempdir();
 }
 
@@ -444,7 +444,7 @@ pub fn install_game(
 
     // Create temp structures
     let temp_dir = create_temp_dir()?;
-    let mut mas_temp_file = create_temp_file(&temp_dir, "mas.tmp")?;
+    let mut mas_temp_file = create_temp_file(&temp_dir, "jn.tmp")?;
     let mut spr_temp_file = create_temp_file(&temp_dir, "spr.tmp")?;
 
     // Remove old rpy/rpyc
