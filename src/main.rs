@@ -22,8 +22,8 @@ const VERSION: Option<&str> = option_env!("CARGO_PKG_VERSION");
 const DEF_VERSION: &str = "unknown build";
 
 // GH link parts to access the API
-const ORG_NAME: &str = "Monika-After-Story";
-const REPO_NAME: &str = "MonikaModDev";
+const ORG_NAME: &str = "Just-Natsuki-Team";
+const REPO_NAME: &str = "NatsukiModDev";
 
 const CREDITS_URL: &str = "https://www.youtube.com/user/MyNewSoundtrack";
 const CHANGELOG_URL: &str = const_format::formatcp!("https://github.com/{ORG_NAME}/{REPO_NAME}/releases/latest");
@@ -33,16 +33,16 @@ lazy_static! {
     /// The map of regex patterns for the release assets
     pub static ref ASSETS_NAMES_RE_MAP: HashMap<&'static str, Regex> = {
         let mut hm = HashMap::new();
-        hm.insert("def_ver", Regex::new(r"^Monika_After_Story-\d+\.\d+\.\d+-Mod\.zip$").unwrap());
+        hm.insert("def_ver", Regex::new(r"^jn-\d+\.\d+\.\d+\.zip$").unwrap());
         hm.insert("dlx_ver", Regex::new(r"^Monika_After_Story-\d+\.\d+\.\d+-Mod-Dlx\.zip$").unwrap());
-        hm.insert("spr", Regex::new(r"^spritepacks\.zip$").unwrap());
+        hm.insert("spr", Regex::new(r"^outfit_resource_pack_v\d+\.\d+\.\d+\.zip$").unwrap());
         hm
     };
 
     /// The headers we use to access GH API
     pub static ref HEADERS: HeaderMap = {
         let mut h = HeaderMap::new();
-        h.insert(header::USER_AGENT, HeaderValue::from_static("Monika After Story Installer"));
+        h.insert(header::USER_AGENT, HeaderValue::from_static("Just Natsuki Installer"));
         h.insert(header::ACCEPT_CHARSET, HeaderValue::from_static("utf8"));
         h.insert(header::ACCEPT_LANGUAGE, HeaderValue::from_static("en-US"));
         h.insert(header::CONTENT_LANGUAGE, HeaderValue::from_static("en-US"));
