@@ -50,7 +50,7 @@ struct ReleaseData {
     version: String,
     name: String,
     def_ver_asset: GHAsset,
-    dlx_ver_asset: GHAsset,
+    // dlx_ver_asset: GHAsset,
     spr_asset: GHAsset
 }
 
@@ -60,10 +60,10 @@ impl ReleaseData {
         version: String,
         name: String,
         def_ver_asset: GHAsset,
-        dlx_ver_asset: GHAsset,
+        // dlx_ver_asset: GHAsset,
         spr_asset: GHAsset
     ) -> Self {
-        return Self { version, name, def_ver_asset, dlx_ver_asset, spr_asset };
+        return Self { version, name, def_ver_asset, spr_asset };
     }
 }
 
@@ -172,7 +172,7 @@ fn get_release_data(client: &reqwest::Client) -> Result<ReleaseData, InstallErro
         release.tag_name,
         release.name,
         assets_map.remove("def_ver").unwrap(),
-        assets_map.remove("dlx_ver").unwrap(),
+        // assets_map.remove("dlx_ver").unwrap(),
         assets_map.remove("spr").unwrap()
     );
     return Ok(data);
@@ -427,10 +427,11 @@ pub fn install_game(
 
     // Get download link
     let data = get_release_data(&client)?;
-    let main_asset = match app_state.lock().unwrap().get_deluxe_ver_flag() {
-        true => data.dlx_ver_asset,
-        false => data.def_ver_asset
-    };
+    let main_asset = data.def_ver_asset;
+    // let main_asset = match app_state.lock().unwrap().get_deluxe_ver_flag() {
+    //     true => data.dlx_ver_asset,
+    //     false => data.def_ver_asset
+    // };
     let mut destination = app_state.lock().unwrap().get_extraction_dir().clone();
     // Since mac is pain, we have to adjust the destination to be
     // within the app

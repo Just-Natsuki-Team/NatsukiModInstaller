@@ -34,7 +34,7 @@ lazy_static! {
     pub static ref ASSETS_NAMES_RE_MAP: HashMap<&'static str, Regex> = {
         let mut hm = HashMap::new();
         hm.insert("def_ver", Regex::new(r"^jn-\d+\.\d+\.\d+\.zip$").unwrap());
-        hm.insert("dlx_ver", Regex::new(r"^Monika_After_Story-\d+\.\d+\.\d+-Mod-Dlx\.zip$").unwrap());
+        // hm.insert("dlx_ver", Regex::new(r"^Monika_After_Story-\d+\.\d+\.\d+-Mod-Dlx\.zip$").unwrap());
         hm.insert("spr", Regex::new(r"^outfit_resource_pack_v\d+\.\d+\.\d+\.zip$").unwrap());
         hm
     };
