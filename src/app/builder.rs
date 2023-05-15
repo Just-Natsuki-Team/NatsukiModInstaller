@@ -157,8 +157,8 @@ fn __draw_button_widget(b: &mut dyn WidgetExt) {
     let (b_x, b_y, b_w, b_h) = (b.x(), b.y(), b.w(), b.h());
 
     let (frame_color, bg_color, text_color) = match b.has_visible_focus() {
-        true => (C_DDLC_PINK_ACT, C_DDLC_WHITE_ACT, C_DDLC_PEACH),
-        false => (C_DDLC_PINK_IDLE, C_DDLC_WHITE_IDLE, C_BLACK)
+        true => (C_JN_PINK, C_JN_PINK, C_JN_SHADOW),
+        false => (C_JN_PINK, C_JN_SHADOW, C_JN_PINK)
     };
 
     draw::draw_rect_fill(b_x, b_y, b_w, b_h, frame_color);
@@ -234,17 +234,13 @@ fn _draw_check_button(b: &mut CheckButton) {
 
     let bg_color: Color;
     let txt_color: Color;
-    if b.is_checked() {
-        bg_color = C_DDLC_PINK_DARK;
-        txt_color = C_DDLC_PEACH;
-    }
-    else if b.has_visible_focus() {
-        bg_color = C_DDLC_WHITE_ACT;
-        txt_color = C_BLACK;
+    if b.has_visible_focus() {
+        bg_color = C_JN_PINK;
+        txt_color = C_JN_SHADOW;
     }
     else {
-        bg_color = C_DDLC_WHITE_IDLE;
-        txt_color = C_BLACK;
+        bg_color = C_JN_SHADOW;
+        txt_color = C_JN_PINK;
     }
 
     draw::draw_rect_fill(b_x, b_y, b_w, b_h, bg_color);
@@ -253,8 +249,8 @@ fn _draw_check_button(b: &mut CheckButton) {
     draw::draw_rect_with_color(b_x+pad_outer, b_y+pad_outer, b_h-pad_outer*2, b_h-pad_outer*2, C_BLACK);
     if b.is_checked() {
         let pad_inner = pad_outer + 3;
-        draw::draw_rect_fill(b_x+pad_inner, b_y+pad_inner, b_h-pad_inner*2, b_h-pad_inner*2, C_DDLC_PEACH);
-        draw::draw_rect_with_color(b_x+pad_inner, b_y+pad_inner, b_h-pad_inner*2, b_h-pad_inner*2, C_BLACK);
+        draw::draw_rect_fill(b_x+pad_inner, b_y+pad_inner, b_h-pad_inner*2, b_h-pad_inner*2, C_JN_PINK);
+        draw::draw_rect_with_color(b_x+pad_inner, b_y+pad_inner, b_h-pad_inner*2, b_h-pad_inner*2, C_JN_SHADOW);
     }
 
     draw::set_draw_color(txt_color);
@@ -287,8 +283,8 @@ fn draw_volume_button(b: &mut CheckButton, app_state: &ThreadSafeState) {
     let (b_x, b_y, b_w, b_h) = (b.x(), b.y(), b.w(), b.h());
 
     let (frame_color, bg_color) = match b.has_visible_focus() {
-        true => (C_DDLC_PINK_ACT, C_DDLC_WHITE_ACT),
-        false => (C_DDLC_PINK_IDLE, C_DDLC_WHITE_IDLE)
+        true => (C_JN_PINK, C_JN_SHADOW),
+        false => (C_JN_SHADOW, C_JN_PINK)
     };
     let x = b_x+BUT_PADDING;
     let y = b_y+BUT_PADDING;
