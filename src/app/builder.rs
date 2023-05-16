@@ -93,7 +93,6 @@ pub fn build_outer_win(sender: Sender<Message>, app_state: &ThreadSafeState) -> 
     );
     // Set app icon
     load_icon(&mut main_win);
-
     main_win.end();
 
     return main_win;
@@ -107,6 +106,11 @@ pub fn build_inner_win() -> DoubleWindow {
         .with_size(INNER_WIN_WIDTH, INNER_WIN_HEIGHT)
         .with_pos(WIN_PADDING, WIN_PADDING);
     inner_win.set_color(C_DDLC_WHITE_IDLE);
+
+    let mut background: image::PngImage = image::PngImage::from_data(&static_data::JN_BG_DATA).unwrap();
+    inner_win.draw(move |f| {
+        background.draw(f.x(), f.y(), f.w(), f.h());
+    });
 
     // All windows must show credits
     _build_credits_frame();
