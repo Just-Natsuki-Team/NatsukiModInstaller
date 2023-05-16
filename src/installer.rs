@@ -345,7 +345,7 @@ fn extract_archive(
         let mut file = archive.by_index(i)?;
 
         let mut file_path = file.enclosed_name()
-            .ok_or(ExtractionError::UnsafeFilepath(file.name().to_string()))?;
+            .ok_or_else(|| ExtractionError::UnsafeFilepath(file.name().to_string()))?;
 
         if let Some(outer_dir) = file_path.components().next() {
             file_path = file_path.strip_prefix(outer_dir.as_os_str()).unwrap();
