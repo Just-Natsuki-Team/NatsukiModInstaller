@@ -344,8 +344,16 @@ fn extract_archive(
     for i in 0..total_files {
         let mut file = archive.by_index(i)?;
 
-        let file_path = file.enclosed_name()
+        let mut file_path = file.enclosed_name()
             .ok_or(ExtractionError::UnsafeFilepath(file.name().to_string()))?;
+
+        if let Some(outer_dir) = file_path.components().next() {
+            file_path = file_path.strip_prefix(outer_dir.as_os_str()).unwrap();
+        }
+        // Sanity check
+        if file_path.as_os_str().len() == 0 {
+            continue
+        }
 
         let extraction_path = destination.join(file_path);
 
