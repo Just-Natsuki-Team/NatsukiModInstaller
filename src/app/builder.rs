@@ -375,7 +375,7 @@ fn _build_top_frame(label: &str) -> Frame {
 fn _build_mid_frame(label: &str) -> Frame {
     let mut frame = Frame::default()
         .with_size(MID_FRAME_WIDTH, MID_FRAME_HEIGHT)
-        .with_pos(MID_FRAME_XPOS, MID_FRAME_YPOS);
+        .with_pos(MID_FRAME_XPOS, MID_FRAME_YPOS + 100);
     // frame.set_frame(FrameType::FlatBox);
     // frame.set_color(C_BLACK);
     frame.set_align(Align::Center | Align::Inside);
@@ -415,6 +415,7 @@ fn _build_welcome_win_inner_pack() -> Pack {
     return inner_pack;
 }
 
+
 fn _build_welcome_win_outer_pack() -> Pack {
     const WIDTH: i32 = INNER_WIN_WIDTH-INNER_WIN_CONTENT_XPADDING*2;
 
@@ -434,6 +435,15 @@ fn _build_welcome_win_outer_pack() -> Pack {
 
 /// Builds a pack of buttons for the welcome window
 fn _build_welcome_win_pack(sender: Sender<Message>, app_state: &ThreadSafeState) -> Pack {
+
+    // Build the JN logo
+    let logo = image::PngImage::from_data(&static_data::JN_LOGO_DATA).unwrap();
+    let mut logo_frame = Frame::default()
+        .with_size(600, 196)
+        .with_pos(MID_FRAME_XPOS, MID_FRAME_YPOS);
+    logo_frame.set_frame(FrameType::NoBox);
+    logo_frame.set_image(Some(logo));
+
     let outer_pack = _build_welcome_win_outer_pack();
     outer_pack.begin();
 

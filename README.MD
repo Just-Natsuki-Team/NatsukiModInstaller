@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://justnatsuki.club/img/logos/jn_1-2-2_logo.png" height="300"/> <!--Update when we have installer logo-->
+    <img src="https://justnatsuki.club/img/logos/installer.png" height="500"/> <!--Update when we have installer logo-->
 </p>
 <br>
 

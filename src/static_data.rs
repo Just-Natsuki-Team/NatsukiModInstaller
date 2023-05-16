@@ -17,6 +17,7 @@ pub static VOLUME_BUT_CHECK_HOVER_DATA: &'static [u8] = include_bytes!("static/b
 pub static VOLUME_BUT_UNCHECK_DATA: &'static [u8] = include_bytes!("static/but_volume_uncheck.png");
 pub static VOLUME_BUT_UNCHECK_HOVER_DATA: &'static [u8] = include_bytes!("static/but_volume_uncheck_hover.png");
 pub static JN_BG_DATA: &'static [u8] = include_bytes!("static/background.png");
+pub static JN_LOGO_DATA: &'static [u8] = include_bytes!("static/logo.png");
 
 // Sounds
 // Credits: Doki Doki Literature Club - Main Theme (Your Reality) (8-bit Remix)
