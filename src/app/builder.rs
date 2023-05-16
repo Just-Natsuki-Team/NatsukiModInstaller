@@ -719,20 +719,20 @@ pub fn build_options_win(sender: Sender<Message>, app_state: &ThreadSafeState, i
     _build_top_frame(OPTIONS_FRAME_LABEL);
 
 
-    const TOTAL_BUTS: i32 = 2;
+    const TOTAL_BUTS: i32 = 1;
     const XPOS: i32 = INNER_WIN_CONTENT_XPADDING;
     const YPOS: i32 = INNER_WIN_HEIGHT/2 - TOTAL_BUTS*BUT_HEIGHT/2 - (TOTAL_BUTS-1)*BUT_SPACING/2;
     const YPOS_INC: i32 = BUT_HEIGHT + BUT_SPACING;
 
-    let mut but_inst_dlx = _build_check_button(
-        BUT_DLX_VER_CHECK_WIDTH,
-        BUT_DLX_VER_CHECK_HEIGHT,
-        BUT_DLX_VER_CHECK_LABEL,
-        sender,
-        Message::DlxVersionCheck,
-        is_dlx_version
-    );
-    but_inst_dlx.set_pos(XPOS, YPOS);
+    // let mut but_inst_dlx = _build_check_button(
+    //     BUT_DLX_VER_CHECK_WIDTH,
+    //     BUT_DLX_VER_CHECK_HEIGHT,
+    //     BUT_DLX_VER_CHECK_LABEL,
+    //     sender,
+    //     Message::DlxVersionCheck,
+    //     is_dlx_version
+    // );
+    // but_inst_dlx.set_pos(XPOS, YPOS);
     let mut but_inst_spr = _build_check_button(
         BUT_INSTALL_SPR_CHECK_WIDTH,
         BUT_INSTALL_SPR_CHECK_HEIGHT,
@@ -741,7 +741,7 @@ pub fn build_options_win(sender: Sender<Message>, app_state: &ThreadSafeState, i
         Message::InstallSprCheck,
         install_spr
     );
-    but_inst_spr.set_pos(XPOS, YPOS+YPOS_INC);
+    but_inst_spr.set_pos(XPOS, YPOS);
 
 
     _build_abort_back_inst_pack(sender, app_state);
