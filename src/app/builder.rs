@@ -344,6 +344,16 @@ pub fn build_volume_but(sender: Sender<Message>, app_state: &ThreadSafeState) ->
     return but;
 }
 
+/// Just a frame to occupy the space instead of the volume button
+fn _build_dummy_frame() -> Frame {
+    let mut dummy_frame = Frame::default()
+        .with_size(BUT_MUTE_WIDTH, BUT_MUTE_HEIGHT);
+    dummy_frame.set_frame(FrameType::NoBox);
+    dummy_frame.set_color(Color::from_rgba_tuple((0, 0, 0, 0)));
+
+    return dummy_frame;
+}
+
 
 /// Builds a frame at the top with the given label
 fn _build_top_frame(label: &str) -> Frame {
@@ -431,7 +441,8 @@ fn _build_welcome_win_pack(sender: Sender<Message>, app_state: &ThreadSafeState)
     inner_pack.begin();
 
     build_button(BUT_ABORT_LABEL, sender, Message::Abort);
-    build_volume_but(sender, app_state);
+    // build_volume_but(sender, app_state);
+    _build_dummy_frame();
 
     inner_pack.end();
 
@@ -500,7 +511,8 @@ fn _build_4but_pack(
     left_inner_pack.begin();
 
     build_button(BUT_ABORT_LABEL, sender, Message::Abort);
-    build_volume_but(sender, app_state);
+    // build_volume_but(sender, app_state);
+    _build_dummy_frame();
 
     left_inner_pack.end();
 
@@ -768,7 +780,8 @@ pub fn build_propgress_win(sender: Sender<Message>, app_state: &ThreadSafeState,
     pack.begin();
 
     build_button(BUT_ABORT_LABEL, sender, Message::Abort);
-    build_volume_but(sender, app_state);
+    // build_volume_but(sender, app_state);
+    _build_dummy_frame();
 
     pack.end();
 
