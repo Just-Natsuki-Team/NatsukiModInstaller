@@ -105,12 +105,14 @@ pub fn build_inner_win() -> DoubleWindow {
     let mut inner_win = Window::default()
         .with_size(INNER_WIN_WIDTH, INNER_WIN_HEIGHT)
         .with_pos(WIN_PADDING, WIN_PADDING);
-    inner_win.set_color(C_DDLC_WHITE_IDLE);
+    // inner_win.set_color(C_DDLC_WHITE_IDLE);
 
-    let mut background: image::PngImage = image::PngImage::from_data(&static_data::JN_BG_DATA).unwrap();
-    inner_win.draw(move |f| {
-        background.draw(f.x(), f.y(), f.w(), f.h());
-    });
+    // We're using a custom img for the bg
+    let background = image::PngImage::from_data(&static_data::JN_BG_DATA).unwrap();
+    let mut bg_frame = Frame::default()
+        .with_size(INNER_WIN_WIDTH, INNER_WIN_HEIGHT);
+    bg_frame.set_frame(FrameType::NoBox);
+    bg_frame.set_image(Some(background));
 
     // All windows must show credits
     _build_credits_frame();
