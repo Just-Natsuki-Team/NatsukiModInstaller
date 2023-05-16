@@ -624,9 +624,11 @@ fn build_license_txt(buf: TextBuffer) -> TextDisplay {
         .with_size(TXT_DISP_WIDTH, TXT_DISP_HEIGHT)
         .with_pos(TXT_DISP_XPOS, TXT_DISP_YPOS);
         txt_disp.wrap_mode(WrapMode::AtBounds, 0);
-        txt_disp.set_selection_color(C_DDLC_PINK_DARK);
+        txt_disp.set_selection_color(C_JN_PINK);
         txt_disp.set_scrollbar_size(-1);
         txt_disp.set_buffer(buf);
+        txt_disp.set_color(C_JN_SHADOW);
+        txt_disp.set_text_color(C_WHITE);
 
     return txt_disp;
 }
@@ -638,7 +640,6 @@ pub fn build_license_win(sender: Sender<Message>, app_state: &ThreadSafeState) -
 
 
     _build_top_frame(LICENSE_FRAME_LABEL);
-
     let mut buf = TextBuffer::default();
     buf.set_text(static_data::APP_LICENSE);
     let mut total_chars = buf.length();
@@ -679,9 +680,11 @@ pub fn build_select_dir_win(sender: Sender<Message>, app_state: &ThreadSafeState
     txt.set_text_size(SEL_DIR_TXT_SIZE);
     txt.wrap_mode(WrapMode::None, 0);
     txt.set_frame(FrameType::EngravedFrame);
-    txt.set_selection_color(C_DDLC_PINK_DARK);
+    txt.set_selection_color(C_JN_PINK);
     txt.set_scrollbar_size(-1);
     txt.set_buffer(txt_buf);
+    txt.set_color(C_JN_SHADOW);
+    txt.set_text_color(C_WHITE);
 
     let mut but = build_button(BUT_SELECT_DIR_LABEL, sender, Message::SelectDir);
     but.set_pos(INNER_WIN_CONTENT_XPADDING+SEL_DIR_TXT_WIDTH-BUT_WIDTH, SEL_DIR_TXT_YPOS+SEL_DIR_TXT_HEIGHT+BUT_SPACING/2);

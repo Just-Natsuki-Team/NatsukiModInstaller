@@ -163,7 +163,7 @@ pub const C_BLACK: Color = Color::Black;
 pub const C_WHITE: Color = Color::White;
 
 pub const C_JN_PINK: Color = Color::from_hex(0xc6719c);
-pub const C_JN_SHADOW: Color = Color::from_hex(0x110A0D);
+pub const C_JN_SHADOW: Color = Color::from_hex(0x110A11);
 
 /*
 pub const C_DDLC_PEACH: Color = Color::from_hex(0xffaa99);
