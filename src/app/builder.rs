@@ -930,6 +930,15 @@ pub fn build_msg_win(msg: &str) -> DoubleWindow {
 
 /// Builds a pack for the end screens
 fn _build_end_but_pack(sender: Sender<Message>) -> Pack {
+
+    // Build Nat peeking
+    let nat_peek = image::PngImage::from_data(&static_data::JN_NAT_PEEK_DATA).unwrap();
+    let mut nat_peek_frame = Frame::default()
+        .with_size(600, 196)
+        .with_pos(MID_FRAME_XPOS, MID_FRAME_YPOS);
+    nat_peek_frame.set_frame(FrameType::NoBox);
+    nat_peek_frame.set_image(Some(nat_peek));
+
     let mut pack = Pack::default()
         .with_size(INNER_WIN_WIDTH-INNER_WIN_CONTENT_XPADDING*2, BUT_HEIGHT)
         .with_pos(INNER_WIN_CONTENT_XPADDING, INNER_WIN_HEIGHT-BUT_HEIGHT-BUT_PACK_YPADDING)
@@ -938,9 +947,11 @@ fn _build_end_but_pack(sender: Sender<Message>) -> Pack {
 
     pack.set_spacing(BUT_SPACING);
 
-    let mut credits_but = build_button(BUT_CREDITS_LABEL, sender, Message::OpenCredits);
-    credits_but.set_label_size(11);
-    build_button(BUT_CHANGELOG_LABEL, sender, Message::OpenChangelog);
+    _build_dummy_frame();
+
+    // let mut credits_but = build_button(BUT_CREDITS_LABEL, sender, Message::OpenCredits);
+    // credits_but.set_label_size(11);
+    // build_button(BUT_CHANGELOG_LABEL, sender, Message::OpenChangelog);
 
     pack.end();
 
@@ -958,6 +969,14 @@ fn _build_exit_button(sender: Sender<Message>) -> Button {
 pub fn build_abort_win(sender: Sender<Message>) -> DoubleWindow {
     let abort_win = build_inner_win();
     abort_win.begin();
+
+    // Sadge
+    let nat_abort = image::PngImage::from_data(&static_data::JN_NAT_ABORT_DATA).unwrap();
+    let mut nat_abort_frame = Frame::default()
+        .with_size(600, 196)
+        .with_pos(MID_FRAME_XPOS, MID_FRAME_YPOS);
+    nat_abort_frame.set_frame(FrameType::NoBox);
+    nat_abort_frame.set_image(Some(nat_abort));
 
     _build_top_frame(ABORT_TOP_FRAME_LABEL);
     _build_mid_frame(ABORT_MID_FRAME_LABEL);

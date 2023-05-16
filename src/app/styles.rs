@@ -162,6 +162,7 @@ pub const LICENSE_SLIDER_SIZE: f32 = 0.2;
 pub const C_BLACK: Color = Color::Black;
 pub const C_WHITE: Color = Color::White;
 
+pub const C_JN_NATSUKI_PINK: Color = Color::from_hex(0xe23aa3);
 pub const C_JN_PINK: Color = Color::from_hex(0xc6719c);
 pub const C_JN_SHADOW: Color = Color::from_hex(0x110A11);
 
@@ -180,8 +181,8 @@ pub const C_DDLC_PINK_DARK: Color = C_JN_PINK;
 // pub const C_DDLC_WHITE_ACT: Color = Color::from_hex(0xffffff);
 // pub const C_DDLC_PINK_ACT: Color = C_DDLC_PINK_IDLE;
 
-pub const C_BRIGHT_GREEN: Color = Color::from_hex(0x00ff00);
-
+//pub const C_BRIGHT_GREEN: Color = Color::from_hex(0x00ff00);
+pub const C_BRIGHT_GREEN: Color = C_JN_NATSUKI_PINK;
 
 // Raw text
 pub const WELCOME_TOP_FRAME_LABEL: &str = "Welcome to the Just Natsuki installer";
