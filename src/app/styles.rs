@@ -53,8 +53,8 @@ pub const BUT_HEIGHT: i32 = 35;
 pub const BUT_MUTE_WIDTH: i32 = BUT_HEIGHT;
 pub const BUT_MUTE_HEIGHT: i32 = BUT_MUTE_WIDTH;
 
-pub const BUT_DLX_VER_CHECK_WIDTH: i32 = BUT_WIDTH + 225;
-pub const BUT_DLX_VER_CHECK_HEIGHT: i32 = BUT_HEIGHT;
+// pub const BUT_DLX_VER_CHECK_WIDTH: i32 = BUT_WIDTH + 225;
+// pub const BUT_DLX_VER_CHECK_HEIGHT: i32 = BUT_HEIGHT;
 
 pub const BUT_INSTALL_SPR_CHECK_WIDTH: i32 = BUT_WIDTH + 380;
 pub const BUT_INSTALL_SPR_CHECK_HEIGHT: i32 = BUT_HEIGHT;
@@ -74,7 +74,7 @@ pub const BUT_ABORT_LABEL: &str = "Abort";
 pub const BUT_BACK_LABEL: &str = "@< Back ";
 pub const BUT_CONTINUE_LABEL: &str = " Continue@>";
 pub const BUT_SELECT_DIR_LABEL: &str = "Browse @fileopen";
-pub const BUT_DLX_VER_CHECK_LABEL: &str = "Deluxe version (pre-installed spritepacks)";
+// pub const BUT_DLX_VER_CHECK_LABEL: &str = "Deluxe version (pre-installed spritepacks)";
 pub const BUT_INSTALL_SPR_CHECK_LABEL: &str = "Download spritepacks (separate download into '/spritepacks')";
 pub const BUT_INSTALL_LABEL: &str = "Install";
 pub const BUT_OK_LABEL: &str = "Ok";
