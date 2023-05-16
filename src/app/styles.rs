@@ -172,13 +172,13 @@ pub const C_DDLC_PINK_IDLE: Color = Color::from_hex(0xffbde1);
 pub const C_DDLC_PINK_DARK: Color = Color::from_hex(0xbb5599);
 */
 
-pub const C_DDLC_PEACH: Color = C_JN_PINK;
+// pub const C_DDLC_PEACH: Color = C_JN_PINK;
 pub const C_DDLC_WHITE_IDLE: Color = C_JN_SHADOW;
 pub const C_DDLC_PINK_IDLE: Color = C_JN_PINK;
 pub const C_DDLC_PINK_DARK: Color = C_JN_PINK;
 
-pub const C_DDLC_WHITE_ACT: Color = Color::from_hex(0xffffff);
-pub const C_DDLC_PINK_ACT: Color = C_DDLC_PINK_IDLE;
+// pub const C_DDLC_WHITE_ACT: Color = Color::from_hex(0xffffff);
+// pub const C_DDLC_PINK_ACT: Color = C_DDLC_PINK_IDLE;
 
 pub const C_BRIGHT_GREEN: Color = Color::from_hex(0x00ff00);
 
