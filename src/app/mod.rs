@@ -71,7 +71,7 @@ pub struct InstallerApp {
     main_window: DoubleWindow,
     // The windows the user can switch
     // using the back & continue buttons
-    linked_windows: [DoubleWindow; 5],
+    linked_windows: [DoubleWindow; 4],
     // Current window id
     current_window_id: usize,
     // These windows need to be available directly
@@ -110,7 +110,7 @@ impl InstallerApp {
                 builder::build_welcome_win(sender, &state),
                 builder::build_license_win(sender, &state),
                 builder::build_select_dir_win(sender, &state, path_txt_buf.clone()),
-                builder::build_options_win(sender, &state, is_dlx_version, install_spr),
+                // builder::build_options_win(sender, &state, is_dlx_version, install_spr),
                 builder::build_propgress_win(sender, &state, &progress_bar)
             ]
         };
