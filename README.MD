@@ -7,6 +7,14 @@
 
 A cross-platform installer for [Just Natsuki](https://github.com/Just-Natsuki-Team/NatsukiModDev).
 
+_dev_:
+
+[![CI](https://github.com/Just-Natsuki-Team/NatsukiModInstaller/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/Just-Natsuki-Team/NatsukiModInstaller/actions/workflows/ci.yml)
+
+_master_:
+
+[![CI](https://github.com/Just-Natsuki-Team/NatsukiModInstaller/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Just-Natsuki-Team/NatsukiModInstaller/actions/workflows/ci.yml) [![Build](https://github.com/Just-Natsuki-Team/NatsukiModInstaller/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/Just-Natsuki-Team/NatsukiModInstaller/actions/workflows/build.yml)
+
 ### Made possible thanks to:
 
 - The [Monika After Story Team](https://github.com/Monika-After-Story/MonikaModDev), for permission to fork and use their [original installer](https://github.com/Monika-After-Story/mas-installer).
