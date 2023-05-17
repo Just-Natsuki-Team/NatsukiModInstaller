@@ -14,7 +14,7 @@ use rodio::{
 
 use crate::{
     errors::AudioError,
-    static_data
+    // static_data
 };
 
 
@@ -66,6 +66,7 @@ impl AudioManager {
     }
 
     /// Appends a new Source to play in this audio manager
+    #[allow(dead_code)]
     pub fn append_source(&self, source: Sauce, repeat: bool) {
         if repeat {
             self.get_sink().append(source.repeat_infinite());
@@ -76,6 +77,7 @@ impl AudioManager {
     }
 
     /// Builds Source from raw data, then appends to the queue of this audio manager
+    #[allow(dead_code)]
     pub fn append_raw(&self, data: RawData, repeat: bool) -> Result<(), AudioError> {
         self.append_source(get_source_from_raw(data)?, repeat);
         return Ok(());
@@ -110,6 +112,7 @@ impl AudioManager {
 }
 
 
+#[allow(dead_code)]
 fn get_source_from_raw(data: RawData) -> Result<Sauce, AudioError> {
     let buf = Cursor::new(data);
     let decoder = Decoder::new(buf)?.convert_samples::<SampleType>();
@@ -121,7 +124,7 @@ fn get_source_from_raw(data: RawData) -> Result<Sauce, AudioError> {
 /// To stop the audio, use AudioManager.stop()
 pub fn play_theme() -> Result<AudioManager, AudioError> {
     let manager = AudioManager::try_default()?;
-    manager.append_raw(static_data::INSTALLER_THEME_DATA, true)?;
+    // manager.append_raw(static_data::INSTALLER_THEME_DATA, true)?;
 
     return Ok(manager);
 }

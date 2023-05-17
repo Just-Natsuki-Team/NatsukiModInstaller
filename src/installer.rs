@@ -50,7 +50,7 @@ struct ReleaseData {
     version: String,
     name: String,
     def_ver_asset: GHAsset,
-    dlx_ver_asset: GHAsset,
+    // dlx_ver_asset: GHAsset,
     spr_asset: GHAsset
 }
 
@@ -60,10 +60,10 @@ impl ReleaseData {
         version: String,
         name: String,
         def_ver_asset: GHAsset,
-        dlx_ver_asset: GHAsset,
+        // dlx_ver_asset: GHAsset,
         spr_asset: GHAsset
     ) -> Self {
-        return Self { version, name, def_ver_asset, dlx_ver_asset, spr_asset };
+        return Self { version, name, def_ver_asset, spr_asset };
     }
 }
 
@@ -172,7 +172,7 @@ fn get_release_data(client: &reqwest::Client) -> Result<ReleaseData, InstallErro
         release.tag_name,
         release.name,
         assets_map.remove("def_ver").unwrap(),
-        assets_map.remove("dlx_ver").unwrap(),
+        // assets_map.remove("dlx_ver").unwrap(),
         assets_map.remove("spr").unwrap()
     );
     return Ok(data);
@@ -344,8 +344,16 @@ fn extract_archive(
     for i in 0..total_files {
         let mut file = archive.by_index(i)?;
 
-        let file_path = file.enclosed_name()
-            .ok_or(ExtractionError::UnsafeFilepath(file.name().to_string()))?;
+        let mut file_path = file.enclosed_name()
+            .ok_or_else(|| ExtractionError::UnsafeFilepath(file.name().to_string()))?;
+
+        if let Some(outer_dir) = file_path.components().next() {
+            file_path = file_path.strip_prefix(outer_dir.as_os_str()).unwrap();
+        }
+        // Sanity check
+        if file_path.as_os_str().len() == 0 {
+            continue
+        }
 
         let extraction_path = destination.join(file_path);
 
@@ -382,7 +390,7 @@ fn extract_archive(
 /// Creates a temp dir for the installer temp data
 fn create_temp_dir() -> Result<tempfile::TempDir, io::Error> {
     return tempfile::Builder::new()
-        .prefix(".mas_installer-")
+        .prefix(".jn_installer-")
         .tempdir();
 }
 
@@ -427,10 +435,11 @@ pub fn install_game(
 
     // Get download link
     let data = get_release_data(&client)?;
-    let main_asset = match app_state.lock().unwrap().get_deluxe_ver_flag() {
-        true => data.dlx_ver_asset,
-        false => data.def_ver_asset
-    };
+    let main_asset = data.def_ver_asset;
+    // let main_asset = match app_state.lock().unwrap().get_deluxe_ver_flag() {
+    //     true => data.dlx_ver_asset,
+    //     false => data.def_ver_asset
+    // };
     let mut destination = app_state.lock().unwrap().get_extraction_dir().clone();
     // Since mac is pain, we have to adjust the destination to be
     // within the app
@@ -443,7 +452,7 @@ pub fn install_game(
 
     // Create temp structures
     let temp_dir = create_temp_dir()?;
-    let mut mas_temp_file = create_temp_file(&temp_dir, "mas.tmp")?;
+    let mut mas_temp_file = create_temp_file(&temp_dir, "jn.tmp")?;
     let mut spr_temp_file = create_temp_file(&temp_dir, "spr.tmp")?;
 
     // Remove old rpy/rpyc

@@ -14,7 +14,7 @@ use lazy_static::lazy_static;
 
 
 // App title
-pub const WIN_TITLE: &str = "Monika After Story Installer";
+pub const WIN_TITLE: &str = "Just Natsuki Installer";
 // Err window title
 pub const ALERT_WIN_TITLE: &str = "Error!";
 // Msg window title
@@ -25,7 +25,7 @@ pub const MSG_WIN_TITLE: &str = "Attention!";
 pub const WIN_WIDTH: i32 = 600;
 pub const WIN_HEIGHT: i32 = 500;
 
-pub const WIN_PADDING: i32 = 4;
+pub const WIN_PADDING: i32 = 2;
 
 pub const INNER_WIN_WIDTH: i32 = WIN_WIDTH - 2*WIN_PADDING;
 pub const INNER_WIN_HEIGHT: i32 = WIN_HEIGHT - 2*WIN_PADDING;
@@ -53,8 +53,8 @@ pub const BUT_HEIGHT: i32 = 35;
 pub const BUT_MUTE_WIDTH: i32 = BUT_HEIGHT;
 pub const BUT_MUTE_HEIGHT: i32 = BUT_MUTE_WIDTH;
 
-pub const BUT_DLX_VER_CHECK_WIDTH: i32 = BUT_WIDTH + 225;
-pub const BUT_DLX_VER_CHECK_HEIGHT: i32 = BUT_HEIGHT;
+// pub const BUT_DLX_VER_CHECK_WIDTH: i32 = BUT_WIDTH + 225;
+// pub const BUT_DLX_VER_CHECK_HEIGHT: i32 = BUT_HEIGHT;
 
 pub const BUT_INSTALL_SPR_CHECK_WIDTH: i32 = BUT_WIDTH + 380;
 pub const BUT_INSTALL_SPR_CHECK_HEIGHT: i32 = BUT_HEIGHT;
@@ -63,9 +63,9 @@ pub const BUT_INSTALL_SPR_CHECK_HEIGHT: i32 = BUT_HEIGHT;
 // pub const BUT_CREDITS_HEIGHT: i32 = BUT_HEIGHT;
 
 // padding of the frame within buttons
-pub const BUT_PADDING: i32 = 3;
-// Spacing between teh buttons
-pub const BUT_SPACING: i32 = 5;
+pub const BUT_PADDING: i32 = 2;
+// Spacing between the buttons
+pub const BUT_SPACING: i32 = 10;
 
 pub const BUT_FONT_SIZE: i32 = 16;
 pub const BUT_FONT: Font = Font::HelveticaBold;
@@ -74,8 +74,8 @@ pub const BUT_ABORT_LABEL: &str = "Abort";
 pub const BUT_BACK_LABEL: &str = "@< Back ";
 pub const BUT_CONTINUE_LABEL: &str = " Continue@>";
 pub const BUT_SELECT_DIR_LABEL: &str = "Browse @fileopen";
-pub const BUT_DLX_VER_CHECK_LABEL: &str = "Deluxe version (pre-installed spritepacks)";
-pub const BUT_INSTALL_SPR_CHECK_LABEL: &str = "Download spritepacks (separate download into '/spritepacks')";
+// pub const BUT_DLX_VER_CHECK_LABEL: &str = "Deluxe version (pre-installed spritepacks)";
+pub const BUT_INSTALL_SPR_CHECK_LABEL: &str = "(No additional options available)";
 pub const BUT_INSTALL_LABEL: &str = "Install";
 pub const BUT_OK_LABEL: &str = "Ok";
 pub const BUT_EXIT_LABEL: &str = "Exit";
@@ -162,23 +162,33 @@ pub const LICENSE_SLIDER_SIZE: f32 = 0.2;
 pub const C_BLACK: Color = Color::Black;
 pub const C_WHITE: Color = Color::White;
 
+pub const C_JN_NATSUKI_PINK: Color = Color::from_hex(0xe23aa3);
+pub const C_JN_PINK: Color = Color::from_hex(0xc6719c);
+pub const C_JN_SHADOW: Color = Color::from_hex(0x110A11);
+
+/*
 pub const C_DDLC_PEACH: Color = Color::from_hex(0xffaa99);
 pub const C_DDLC_WHITE_IDLE: Color = Color::from_hex(0xffe6f4);
 pub const C_DDLC_PINK_IDLE: Color = Color::from_hex(0xffbde1);
 pub const C_DDLC_PINK_DARK: Color = Color::from_hex(0xbb5599);
+*/
 
-pub const C_DDLC_WHITE_ACT: Color = Color::from_hex(0xffffff);
-pub const C_DDLC_PINK_ACT: Color = C_DDLC_PINK_IDLE;
+// pub const C_DDLC_PEACH: Color = C_JN_PINK;
+pub const C_DDLC_WHITE_IDLE: Color = C_JN_SHADOW;
+pub const C_DDLC_PINK_IDLE: Color = C_JN_PINK;
+pub const C_DDLC_PINK_DARK: Color = C_JN_PINK;
 
-pub const C_BRIGHT_GREEN: Color = Color::from_hex(0x00ff00);
+// pub const C_DDLC_WHITE_ACT: Color = Color::from_hex(0xffffff);
+// pub const C_DDLC_PINK_ACT: Color = C_DDLC_PINK_IDLE;
 
+//pub const C_BRIGHT_GREEN: Color = Color::from_hex(0x00ff00);
+pub const C_BRIGHT_GREEN: Color = C_JN_NATSUKI_PINK;
 
 // Raw text
-pub const WELCOME_TOP_FRAME_LABEL: &str = "Welcome to MAS installer";
+pub const WELCOME_TOP_FRAME_LABEL: &str = "Welcome to the Just Natsuki installer";
 pub const WELCOME_MID_FRAME_LABEL: &str = concat!(
     "This program will install the latest version\n",
-    "of the Monika After Story mod\n",
-    "on your computer"
+    "of Just Natsuki on your computer"
 );
 pub const LICENSE_FRAME_LABEL: &str = "By continuing you agree with our license";
 pub const SELECT_DIR_FRAME_LABEL: &str = "Select Doki Doki Literature Club directory";
@@ -191,10 +201,10 @@ pub const ABORT_MID_FRAME_LABEL: &str = concat!(
 );
 pub const DONE_TOP_FRAME_LABEL: &str = "Finished";
 pub const DONE_MID_FRAME_LABEL: &str = concat!(
-    "Monika After Story has been successfully\n",
+    "Just Natsuki has been successfully\n",
     "installed on your computer"
 );
-pub const CREDITS_FRAME_LABEL: &str = "Installer theme by MyNewSoundtrack";
+pub const CREDITS_FRAME_LABEL: &str = "Original installer by MAS (Monika After Story) Team | Authored by Booplicate";
 
 
 // Define images
