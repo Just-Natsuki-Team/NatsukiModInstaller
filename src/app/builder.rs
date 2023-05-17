@@ -711,7 +711,8 @@ pub fn build_select_dir_win(sender: Sender<Message>, app_state: &ThreadSafeState
     let mut but = build_button(BUT_SELECT_DIR_LABEL, sender, Message::SelectDir);
     but.set_pos(INNER_WIN_CONTENT_XPADDING+SEL_DIR_TXT_WIDTH-BUT_WIDTH, SEL_DIR_TXT_YPOS+SEL_DIR_TXT_HEIGHT+BUT_SPACING/2);
 
-    _build_abort_back_contn_pack(sender, app_state);
+    // _build_abort_back_contn_pack(sender, app_state);
+    _build_abort_back_inst_pack(sender, app_state);
 
 
     select_dir_win.end();
