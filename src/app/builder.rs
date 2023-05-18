@@ -93,7 +93,6 @@ pub fn build_outer_win(sender: Sender<Message>, app_state: &ThreadSafeState) -> 
     );
     // Set app icon
     load_icon(&mut main_win);
-
     main_win.end();
 
     return main_win;
@@ -106,7 +105,14 @@ pub fn build_inner_win() -> DoubleWindow {
     let mut inner_win = Window::default()
         .with_size(INNER_WIN_WIDTH, INNER_WIN_HEIGHT)
         .with_pos(WIN_PADDING, WIN_PADDING);
-    inner_win.set_color(C_DDLC_WHITE_IDLE);
+    // inner_win.set_color(C_DDLC_WHITE_IDLE);
+
+    // We're using a custom img for the bg
+    let background = image::PngImage::from_data(&static_data::JN_BG_DATA).unwrap();
+    let mut bg_frame = Frame::default()
+        .with_size(INNER_WIN_WIDTH, INNER_WIN_HEIGHT);
+    bg_frame.set_frame(FrameType::NoBox);
+    bg_frame.set_image(Some(background));
 
     // All windows must show credits
     _build_credits_frame();
@@ -157,8 +163,8 @@ fn __draw_button_widget(b: &mut dyn WidgetExt) {
     let (b_x, b_y, b_w, b_h) = (b.x(), b.y(), b.w(), b.h());
 
     let (frame_color, bg_color, text_color) = match b.has_visible_focus() {
-        true => (C_DDLC_PINK_ACT, C_DDLC_WHITE_ACT, C_DDLC_PEACH),
-        false => (C_DDLC_PINK_IDLE, C_DDLC_WHITE_IDLE, C_BLACK)
+        true => (C_JN_PINK, C_JN_PINK, C_JN_SHADOW),
+        false => (C_JN_PINK, C_JN_SHADOW, C_JN_PINK)
     };
 
     draw::draw_rect_fill(b_x, b_y, b_w, b_h, frame_color);
@@ -234,17 +240,13 @@ fn _draw_check_button(b: &mut CheckButton) {
 
     let bg_color: Color;
     let txt_color: Color;
-    if b.is_checked() {
-        bg_color = C_DDLC_PINK_DARK;
-        txt_color = C_DDLC_PEACH;
-    }
-    else if b.has_visible_focus() {
-        bg_color = C_DDLC_WHITE_ACT;
-        txt_color = C_BLACK;
+    if b.has_visible_focus() {
+        bg_color = C_JN_PINK;
+        txt_color = C_JN_SHADOW;
     }
     else {
-        bg_color = C_DDLC_WHITE_IDLE;
-        txt_color = C_BLACK;
+        bg_color = C_JN_SHADOW;
+        txt_color = C_JN_PINK;
     }
 
     draw::draw_rect_fill(b_x, b_y, b_w, b_h, bg_color);
@@ -253,8 +255,8 @@ fn _draw_check_button(b: &mut CheckButton) {
     draw::draw_rect_with_color(b_x+pad_outer, b_y+pad_outer, b_h-pad_outer*2, b_h-pad_outer*2, C_BLACK);
     if b.is_checked() {
         let pad_inner = pad_outer + 3;
-        draw::draw_rect_fill(b_x+pad_inner, b_y+pad_inner, b_h-pad_inner*2, b_h-pad_inner*2, C_DDLC_PEACH);
-        draw::draw_rect_with_color(b_x+pad_inner, b_y+pad_inner, b_h-pad_inner*2, b_h-pad_inner*2, C_BLACK);
+        draw::draw_rect_fill(b_x+pad_inner, b_y+pad_inner, b_h-pad_inner*2, b_h-pad_inner*2, C_JN_PINK);
+        draw::draw_rect_with_color(b_x+pad_inner, b_y+pad_inner, b_h-pad_inner*2, b_h-pad_inner*2, C_JN_SHADOW);
     }
 
     draw::set_draw_color(txt_color);
@@ -287,8 +289,8 @@ fn draw_volume_button(b: &mut CheckButton, app_state: &ThreadSafeState) {
     let (b_x, b_y, b_w, b_h) = (b.x(), b.y(), b.w(), b.h());
 
     let (frame_color, bg_color) = match b.has_visible_focus() {
-        true => (C_DDLC_PINK_ACT, C_DDLC_WHITE_ACT),
-        false => (C_DDLC_PINK_IDLE, C_DDLC_WHITE_IDLE)
+        true => (C_JN_PINK, C_JN_SHADOW),
+        false => (C_JN_SHADOW, C_JN_PINK)
     };
     let x = b_x+BUT_PADDING;
     let y = b_y+BUT_PADDING;
@@ -342,6 +344,16 @@ pub fn build_volume_but(sender: Sender<Message>, app_state: &ThreadSafeState) ->
     return but;
 }
 
+/// Just a frame to occupy the space instead of the volume button
+fn _build_dummy_frame() -> Frame {
+    let mut dummy_frame = Frame::default()
+        .with_size(BUT_MUTE_WIDTH, BUT_MUTE_HEIGHT);
+    dummy_frame.set_frame(FrameType::NoBox);
+    dummy_frame.set_color(Color::from_rgba_tuple((0, 0, 0, 0)));
+
+    return dummy_frame;
+}
+
 
 /// Builds a frame at the top with the given label
 fn _build_top_frame(label: &str) -> Frame {
@@ -363,7 +375,7 @@ fn _build_top_frame(label: &str) -> Frame {
 fn _build_mid_frame(label: &str) -> Frame {
     let mut frame = Frame::default()
         .with_size(MID_FRAME_WIDTH, MID_FRAME_HEIGHT)
-        .with_pos(MID_FRAME_XPOS, MID_FRAME_YPOS);
+        .with_pos(MID_FRAME_XPOS, MID_FRAME_YPOS + 100);
     // frame.set_frame(FrameType::FlatBox);
     // frame.set_color(C_BLACK);
     frame.set_align(Align::Center | Align::Inside);
@@ -403,6 +415,7 @@ fn _build_welcome_win_inner_pack() -> Pack {
     return inner_pack;
 }
 
+
 fn _build_welcome_win_outer_pack() -> Pack {
     const WIDTH: i32 = INNER_WIN_WIDTH-INNER_WIN_CONTENT_XPADDING*2;
 
@@ -422,6 +435,15 @@ fn _build_welcome_win_outer_pack() -> Pack {
 
 /// Builds a pack of buttons for the welcome window
 fn _build_welcome_win_pack(sender: Sender<Message>, app_state: &ThreadSafeState) -> Pack {
+
+    // Build the JN logo
+    let logo = image::PngImage::from_data(&static_data::JN_LOGO_DATA).unwrap();
+    let mut logo_frame = Frame::default()
+        .with_size(600, 196)
+        .with_pos(MID_FRAME_XPOS, MID_FRAME_YPOS);
+    logo_frame.set_frame(FrameType::NoBox);
+    logo_frame.set_image(Some(logo));
+
     let outer_pack = _build_welcome_win_outer_pack();
     outer_pack.begin();
 
@@ -429,7 +451,8 @@ fn _build_welcome_win_pack(sender: Sender<Message>, app_state: &ThreadSafeState)
     inner_pack.begin();
 
     build_button(BUT_ABORT_LABEL, sender, Message::Abort);
-    build_volume_but(sender, app_state);
+    // build_volume_but(sender, app_state);
+    _build_dummy_frame();
 
     inner_pack.end();
 
@@ -498,7 +521,8 @@ fn _build_4but_pack(
     left_inner_pack.begin();
 
     build_button(BUT_ABORT_LABEL, sender, Message::Abort);
-    build_volume_but(sender, app_state);
+    // build_volume_but(sender, app_state);
+    _build_dummy_frame();
 
     left_inner_pack.end();
 
@@ -622,9 +646,11 @@ fn build_license_txt(buf: TextBuffer) -> TextDisplay {
         .with_size(TXT_DISP_WIDTH, TXT_DISP_HEIGHT)
         .with_pos(TXT_DISP_XPOS, TXT_DISP_YPOS);
         txt_disp.wrap_mode(WrapMode::AtBounds, 0);
-        txt_disp.set_selection_color(C_DDLC_PINK_DARK);
+        txt_disp.set_selection_color(C_JN_PINK);
         txt_disp.set_scrollbar_size(-1);
         txt_disp.set_buffer(buf);
+        txt_disp.set_color(C_JN_SHADOW);
+        txt_disp.set_text_color(C_WHITE);
 
     return txt_disp;
 }
@@ -636,7 +662,6 @@ pub fn build_license_win(sender: Sender<Message>, app_state: &ThreadSafeState) -
 
 
     _build_top_frame(LICENSE_FRAME_LABEL);
-
     let mut buf = TextBuffer::default();
     buf.set_text(static_data::APP_LICENSE);
     let mut total_chars = buf.length();
@@ -677,14 +702,17 @@ pub fn build_select_dir_win(sender: Sender<Message>, app_state: &ThreadSafeState
     txt.set_text_size(SEL_DIR_TXT_SIZE);
     txt.wrap_mode(WrapMode::None, 0);
     txt.set_frame(FrameType::EngravedFrame);
-    txt.set_selection_color(C_DDLC_PINK_DARK);
+    txt.set_selection_color(C_JN_PINK);
     txt.set_scrollbar_size(-1);
     txt.set_buffer(txt_buf);
+    txt.set_color(C_JN_SHADOW);
+    txt.set_text_color(C_WHITE);
 
     let mut but = build_button(BUT_SELECT_DIR_LABEL, sender, Message::SelectDir);
     but.set_pos(INNER_WIN_CONTENT_XPADDING+SEL_DIR_TXT_WIDTH-BUT_WIDTH, SEL_DIR_TXT_YPOS+SEL_DIR_TXT_HEIGHT+BUT_SPACING/2);
 
-    _build_abort_back_contn_pack(sender, app_state);
+    // _build_abort_back_contn_pack(sender, app_state);
+    _build_abort_back_inst_pack(sender, app_state);
 
 
     select_dir_win.end();
@@ -702,20 +730,20 @@ pub fn build_options_win(sender: Sender<Message>, app_state: &ThreadSafeState, i
     _build_top_frame(OPTIONS_FRAME_LABEL);
 
 
-    const TOTAL_BUTS: i32 = 2;
+    const TOTAL_BUTS: i32 = 1;
     const XPOS: i32 = INNER_WIN_CONTENT_XPADDING;
     const YPOS: i32 = INNER_WIN_HEIGHT/2 - TOTAL_BUTS*BUT_HEIGHT/2 - (TOTAL_BUTS-1)*BUT_SPACING/2;
     const YPOS_INC: i32 = BUT_HEIGHT + BUT_SPACING;
 
-    let mut but_inst_dlx = _build_check_button(
-        BUT_DLX_VER_CHECK_WIDTH,
-        BUT_DLX_VER_CHECK_HEIGHT,
-        BUT_DLX_VER_CHECK_LABEL,
-        sender,
-        Message::DlxVersionCheck,
-        is_dlx_version
-    );
-    but_inst_dlx.set_pos(XPOS, YPOS);
+    // let mut but_inst_dlx = _build_check_button(
+    //     BUT_DLX_VER_CHECK_WIDTH,
+    //     BUT_DLX_VER_CHECK_HEIGHT,
+    //     BUT_DLX_VER_CHECK_LABEL,
+    //     sender,
+    //     Message::DlxVersionCheck,
+    //     is_dlx_version
+    // );
+    // but_inst_dlx.set_pos(XPOS, YPOS);
     let mut but_inst_spr = _build_check_button(
         BUT_INSTALL_SPR_CHECK_WIDTH,
         BUT_INSTALL_SPR_CHECK_HEIGHT,
@@ -724,7 +752,7 @@ pub fn build_options_win(sender: Sender<Message>, app_state: &ThreadSafeState, i
         Message::InstallSprCheck,
         install_spr
     );
-    but_inst_spr.set_pos(XPOS, YPOS+YPOS_INC);
+    but_inst_spr.set_pos(XPOS, YPOS);
 
 
     _build_abort_back_inst_pack(sender, app_state);
@@ -763,7 +791,8 @@ pub fn build_propgress_win(sender: Sender<Message>, app_state: &ThreadSafeState,
     pack.begin();
 
     build_button(BUT_ABORT_LABEL, sender, Message::Abort);
-    build_volume_but(sender, app_state);
+    // build_volume_but(sender, app_state);
+    _build_dummy_frame();
 
     pack.end();
 
@@ -902,6 +931,15 @@ pub fn build_msg_win(msg: &str) -> DoubleWindow {
 
 /// Builds a pack for the end screens
 fn _build_end_but_pack(sender: Sender<Message>) -> Pack {
+
+    // Build Nat peeking
+    let nat_peek = image::PngImage::from_data(&static_data::JN_NAT_PEEK_DATA).unwrap();
+    let mut nat_peek_frame = Frame::default()
+        .with_size(600, 196)
+        .with_pos(MID_FRAME_XPOS, MID_FRAME_YPOS);
+    nat_peek_frame.set_frame(FrameType::NoBox);
+    nat_peek_frame.set_image(Some(nat_peek));
+
     let mut pack = Pack::default()
         .with_size(INNER_WIN_WIDTH-INNER_WIN_CONTENT_XPADDING*2, BUT_HEIGHT)
         .with_pos(INNER_WIN_CONTENT_XPADDING, INNER_WIN_HEIGHT-BUT_HEIGHT-BUT_PACK_YPADDING)
@@ -910,9 +948,11 @@ fn _build_end_but_pack(sender: Sender<Message>) -> Pack {
 
     pack.set_spacing(BUT_SPACING);
 
-    let mut credits_but = build_button(BUT_CREDITS_LABEL, sender, Message::OpenCredits);
-    credits_but.set_label_size(11);
-    build_button(BUT_CHANGELOG_LABEL, sender, Message::OpenChangelog);
+    _build_dummy_frame();
+
+    // let mut credits_but = build_button(BUT_CREDITS_LABEL, sender, Message::OpenCredits);
+    // credits_but.set_label_size(11);
+    // build_button(BUT_CHANGELOG_LABEL, sender, Message::OpenChangelog);
 
     pack.end();
 
@@ -930,6 +970,14 @@ fn _build_exit_button(sender: Sender<Message>) -> Button {
 pub fn build_abort_win(sender: Sender<Message>) -> DoubleWindow {
     let abort_win = build_inner_win();
     abort_win.begin();
+
+    // Sadge
+    let nat_abort = image::PngImage::from_data(&static_data::JN_NAT_ABORT_DATA).unwrap();
+    let mut nat_abort_frame = Frame::default()
+        .with_size(600, 196)
+        .with_pos(MID_FRAME_XPOS, MID_FRAME_YPOS);
+    nat_abort_frame.set_frame(FrameType::NoBox);
+    nat_abort_frame.set_image(Some(nat_abort));
 
     _build_top_frame(ABORT_TOP_FRAME_LABEL);
     _build_mid_frame(ABORT_MID_FRAME_LABEL);

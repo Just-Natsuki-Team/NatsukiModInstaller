@@ -71,7 +71,7 @@ pub struct InstallerApp {
     main_window: DoubleWindow,
     // The windows the user can switch
     // using the back & continue buttons
-    linked_windows: [DoubleWindow; 5],
+    linked_windows: [DoubleWindow; 4],
     // Current window id
     current_window_id: usize,
     // These windows need to be available directly
@@ -110,7 +110,7 @@ impl InstallerApp {
                 builder::build_welcome_win(sender, &state),
                 builder::build_license_win(sender, &state),
                 builder::build_select_dir_win(sender, &state, path_txt_buf.clone()),
-                builder::build_options_win(sender, &state, is_dlx_version, install_spr),
+                // builder::build_options_win(sender, &state, is_dlx_version, install_spr),
                 builder::build_propgress_win(sender, &state, &progress_bar)
             ]
         };
@@ -174,7 +174,7 @@ impl InstallerApp {
                     Message::SelectDir => {
                         let selected_dir = dialog::run_select_dir_dlg(styles::SEL_DIR_DLG_PROMPT);
                         if !utils::is_valid_ddlc_dir(&selected_dir) {
-                            dialog::run_msg_dlg("Attention!\nSelected directory doesn't appear to be\na valid DDLC directory");
+                            dialog::run_msg_dlg(styles::DLG_MSG_SELECTED_BAD_DIR);
                         }
                         self.set_extraction_dir(selected_dir);
                     },
@@ -215,7 +215,7 @@ impl InstallerApp {
                         let app_state = self.state.lock().unwrap();
                         // We warn the user again if the extraction dir looks wrong
                         if !utils::is_valid_ddlc_dir(app_state.get_extraction_dir()) {
-                            dialog::run_msg_dlg("Attention!\nInstalling into a non-DDLC directory");
+                            dialog::run_msg_dlg(styles::DLG_MSG_INSTALLING_IN_BAD_DIR);
                         }
                         // We also need to move to the next window
                         self.sender.send(Message::NextPage);
@@ -230,27 +230,27 @@ impl InstallerApp {
                     },
                     Message::Preparing => {
                         println!("Preparing...");
-                        self.progress_bar.set_label("Preparing...");
+                        self.progress_bar.set_label(styles::PB_LABEL_PREPARING);
                     },
                     Message::Downloading => {
                         println!("Done!\nDownloading...");
-                        self.progress_bar.set_label("Downloading...");
+                        self.progress_bar.set_label(styles::PB_LABEL_DOWNLOADING_GAME);
                     },
                     Message::Extracting => {
                         println!("Done!\nExtracting...");
-                        self.progress_bar.set_label("Extracting...");
+                        self.progress_bar.set_label(styles::PB_LABEL_EXTRACTING_GAME);
                     },
                     Message::DownloadingSpr => {
                         println!("Done!\nDownloading spritepacks...");
-                        self.progress_bar.set_label("Downloading spritepacks...");
+                        self.progress_bar.set_label(styles::PB_LABEL_DOWNLOADING_SPRITEPACKS);
                     },
                     Message::ExtractingSpr => {
                         println!("Done!\nExtracting spritepacks...");
-                        self.progress_bar.set_label("Extracting spritepacks...");
+                        self.progress_bar.set_label(styles::PB_LABEL_EXTRACTING_SPRITEPACKS);
                     },
                     Message::CleaningUp => {
                         println!("Done!\nCleaning up...");
-                        self.progress_bar.set_label("Cleaning up...");
+                        self.progress_bar.set_label(styles::PB_LABEL_CLEANINGUP);
                     },
                     Message::Error => {
                         println!("An error has occurred...");

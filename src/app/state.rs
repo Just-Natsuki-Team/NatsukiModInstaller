@@ -23,6 +23,7 @@ pub struct AppState {
     music_volume: Volume
 }
 
+#[allow(dead_code)]
 impl AppState {
     /// Creates a new AppState
     pub fn new(
@@ -57,7 +58,6 @@ impl AppState {
     }
 
     /// Sets the dlx version flag
-    #[allow(dead_code)]
     pub fn set_deluxe_ver_flag(&mut self, value: bool) {
         self.deluxe_ver_flag = value;
     }
@@ -73,7 +73,6 @@ impl AppState {
     }
 
     /// Sets the install spritepacks flag
-    #[allow(dead_code)]
     pub fn set_install_spr_flag(&mut self, value: bool) {
         self.install_spr_flag = value;
     }

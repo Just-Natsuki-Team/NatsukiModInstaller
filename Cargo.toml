@@ -1,9 +1,9 @@
 [package]
-name = "mas-installer"
-version = "0.2.0"
+name = "jn-installer"
+version = "0.3.0"
 authors = ["Booplicate"]
-description = "Custom cross-platform installer for Monika After Story"
-repository = "https://github.com/Monika-After-Story/mas-installer/"
+description = "Custom cross-platform installer for Just Natsuki"
+repository = "https://github.com/Just-Natsuki-Team/NatsukiModInstaller/"
 edition = "2021"
 build = "build/build.rs"
 
@@ -26,9 +26,9 @@ const_format = "=0.2.26"# This is temp until rust gets better constant fn
 winres = "=0.1.12"
 
 [package.metadata.winres]
-ProductName = "Monika After Story Installer"
-FileDescription = "Installer for Monika After Story"
-CompanyName = "Monika After Story Team"
+ProductName = "Just Natsuki Installer"
+FileDescription = "Installer for Just Natsuki"
+CompanyName = "Monika After Story & Just Natsuki Teams"
 
 [features]
 default = ["include_license"]

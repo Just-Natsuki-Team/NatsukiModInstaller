@@ -29,11 +29,11 @@ jobs:
 
       - name: Include License (non-windows)
         if: runner.os != 'Windows'
-        run: curl https://raw.githubusercontent.com/Monika-After-Story/MonikaModDev/master/LICENSE.md > src/static/license.md
+        run: curl https://raw.githubusercontent.com/Just-Natsuki-Team/NatsukiModDev/master/LICENSE.md > src/static/license.md
 
       - name: Include License (windows)
         if: runner.os == 'Windows'
-        run: Invoke-WebRequest https://raw.githubusercontent.com/Monika-After-Story/MonikaModDev/master/LICENSE.md -O src/static/license.md
+        run: Invoke-WebRequest https://raw.githubusercontent.com/Just-Natsuki-Team/NatsukiModDev/master/LICENSE.md -O src/static/license.md
 
       - name: Check Build Cache
         uses: actions/cache@v3
@@ -54,14 +54,14 @@ jobs:
         if: runner.os != 'Windows'
         uses: actions/upload-artifact@v3
         with:
-          name: mas-installer-release-${{ matrix.os }}
+          name: jn-installer-release-${{ matrix.os }}
           path: |
-            target/release/mas-installer
+            target/release/jn-installer
 
       - name: Upload Artifacts (windows)
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@v3
         with:
-          name: mas-installer-release-${{ matrix.os }}
+          name: jn-installer-release-${{ matrix.os }}
           path: |
-            target/release/mas-installer.exe
+            target/release/jn-installer.exe
